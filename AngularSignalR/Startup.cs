@@ -28,7 +28,8 @@ namespace AngularSignalR
                 builder
                     .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .WithOrigins("http://localhost:4200");
+                    .AllowAnyOrigin();
+                // .WithOrigins("http://localhost:4200");
             }));
 
             services.AddSignalR();
@@ -46,7 +47,7 @@ namespace AngularSignalR
             app.UseCors("CorsPolicy");
             app.UseSignalR(routes =>
             {
-                routes.MapHub<NotifyHub>("notify");
+                routes.MapHub<NotifyHub>("/Message");
             });
 
             app.UseMvc();
